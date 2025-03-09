@@ -1452,4 +1452,28 @@
       }
     ]
   }
+  , {
+    "name": "Barre de livraison par HeleneGreat",
+    "settings":
+    [
+      {
+        "type": "checkbox",
+        "id": "show_shipping_bar",
+        "label": "Afficher la barre de livraison dans le panier",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "minimum_free_shipping",
+        "label": "Montant minimum pour la livraison gratuite",
+        "default": 50
+      },
+      {
+        "type": "color",
+        "id": "shipping_bar_color",
+        "label": "Couleur de la barre de progression",
+        "default": "#DFD52E"
+      }
+    ]
+  }
 ]
