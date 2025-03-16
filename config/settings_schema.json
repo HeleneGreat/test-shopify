@@ -1476,4 +1476,34 @@
       }
     ]
   }
+  , {
+    "name": "Barre de cadeau gratuit par HeleneGreat",
+    "settings":
+    [
+      {
+        "type": "checkbox",
+        "id": "show_gift_bar",
+        "label": "Afficher la barre de cadeau dans le panier",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "minimum_free_gift",
+        "label": "Montant minimum pour le cadeau gratuit",
+        "default": 100
+      },
+      {
+        "type": "color",
+        "id": "gift_bar_color",
+        "label": "Couleur de la barre de progression",
+        "default": "#2EDFAC"
+      },
+      {
+        "type": "product",
+        "id": "gift_product",
+        "label": "Produit cadeau",
+        "info": "Sélectionnez le produit qui sera offert lorsque le seuil est atteint.",
+      }
+    ]
+  }
 ]

@@ -74,10 +74,17 @@
           </span>
         </button>
       </div>
+
       {% comment %} HeleneGreat : Le panier ne doit pas être vide et la barre de livraison doit être activée pour afficher la barre de progression pour la livraison gratuite {% endcomment %}
       {% if cart != empty and settings.show_shipping_bar %}
         {% render 'free-shipping-bar.liquid' %}
       {% endif %}
+
+      {% comment %} HeleneGreat : Le panier ne doit pas être vide et la barre de cadeau gratuit doit être activée pour afficher la barre de progression pour le cadeau gratuit {% endcomment %}
+      {% if cart != empty and settings.show_gift_bar %}
+        {% render 'free-gift-bar.liquid' %}
+      {% endif %}
+
       <cart-drawer-items
         {% if cart == empty %}
           class=" is-empty"

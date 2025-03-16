@@ -9,7 +9,7 @@ Ce snippet affiche une barre de progression dans le panier indiquant combien il 
 "cart_type": "drawer",
 ```
 [settings_schema.json](../config/settings_schema.json) Ajout du nouveau snippet dans la configuration
-```php
+```json
 , {
     "name": "Barre de livraison par HeleneGreat",
     "settings":
@@ -18,7 +18,7 @@ Ce snippet affiche une barre de progression dans le panier indiquant combien il 
         "type": "checkbox",
         "id": "show_shipping_bar",
         "label": "Afficher la barre de livraison dans le panier",
-        "default": false
+        "default": true
       },
       {
         "type": "number",
@@ -153,4 +153,14 @@ Cliquer sur l'icône des paramètres :
 
 **Sources :** cet exercice a été réalisé à partir d'un tutoriel de [WebSensePro](https://websensepro.com/blog/how-to-add-free-shipping-upsell-in-shopify-cart-without-app/), et adapté à mes besoins.
 
-##
+## 2) Cadeau gratuit
+
+Sur le même principe que la livraison gratuite, ce snippet ajoute une barre de progression dans le panier indiquant combien il reste à l'utilisateur pour bénéficier d'un cadeau gratuit.
+
+**Problèmes rencontrés :**
+Pour le choix du produit offert, j'avais pris par hasard de la cire pour ski, mais je n'arrivais pas à l'ajouter au panier. L'erreur venait que ce produit avait des variants. Une fois l'ID du produit par défaut modifié, je n'avais plus l'erreur.
+
+**Pistes envisagées**
+Réductions "Buy X get Y" dans le back office. Problème : il faudrait sélectionner manuellement tous les produits.
+
+**Sources :** https://shopify.dev/docs/api/ajax/reference/cart

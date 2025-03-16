@@ -1,0 +1,85 @@
+.upsell-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.progress-bar{
+    background-color: #E2E4E3;
+    display: flex;
+    height: 1em;
+    width: 100%;
+    border-radius: 0.75em;
+    padding: 3px;
+    position: relative;
+    align-items: center;
+}
+
+/* C'est ici que sont récupérées les valeurs transmises par le snippet */
+.progress-bar-done{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75em;
+    height: 100%;
+    transition: 1s ease 0.3s;
+    max-width: 100%;
+}
+
+/* Barre de progression pour les frais de livraison gratuits */
+.progress-bar-done.shipping{
+    background-color: var(--progress-shipping-bar-color);
+    background-image: repeating-linear-gradient(
+        to left,
+        var(--progress-shipping-bar-color),
+        var(--progress-shipping-bar-color-lighten-10),
+        var(--progress-shipping-bar-color-lighten-20)
+    );
+    box-shadow: 0 5px 5px -6px var(--progress-shipping-bar-color);
+    width: var(--shipping-percentage);
+}
+
+/* Barre de progression pour le cadeau offert */
+.progress-bar-done.gift{
+    background-color: var(--progress-gift-bar-color);
+    background-image: repeating-linear-gradient(
+        to left,
+        var(--progress-gift-bar-color),
+        var(--progress-gift-bar-color-lighten-10),
+        var(--progress-gift-bar-color-lighten-20)
+    );
+    box-shadow: 0 5px 5px -6px var(--progress-gift-bar-color);
+    width: var(--gift-percentage);
+}
+  
+.free-shipping-icon, .free-gift-icon{
+    position: absolute;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #E2E4E3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-bar::before{
+    content: ' ';
+}
+
+.iconicion{
+    box-shadow: 0 0 10px rgba(62, 101, 207, 0.5);
+    border: 1px solid black;
+    transition: 1s ease 0.7s;
+}
+
+.iconicion.shipping{
+    background-color: var(--progress-shipping-bar-color);
+}
+
+.iconicion.gift{
+    background-color: var(--progress-gift-bar-color);
+}
