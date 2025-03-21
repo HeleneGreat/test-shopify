@@ -37,7 +37,7 @@ Je ne comprends pas, est-ce qu'il y aurait un paramétrage que j'aurai manqué ?
 Le forum de Shopify n'est accessible qu'avec un compte payant.
 
 J'ai enfin réussi à affiché le badge "Soldes" sur la fiche et la carte produit. La découverte d'un équivalent à var_dump pour liquid m'a beaucoup aidé : ``` {{ c | json }} ```
-En inspectant le HTML, je voyais bien que le badge était là, mais n'apparaissait pas, à cause de la classe 'price__badge-sale' qui était en 'display:none;'. J'ai enlevé la classe car je n'ai pas trouvé comment activer l'affichage des badges.
+En inspectant le HTML, je voyais bien que le badge était là, mais n'apparaissait pas, à cause de la classe 'price__badge-sale' qui était en 'display:none;'. J'ai enlevé la classe car je n'ai pas trouvé comment activer l'affichage des badges dans le B.O. Par contre le prix affiché est toujours le prix d'origine, le prix remisé n'est pas disponible. Quand j'ajoute '.json' à l'URL, je ne vois pas le prix remisé dans l'array.
 
 
 ## Mise à jour dynamique lors de l'ajout au panier
