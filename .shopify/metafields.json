@@ -2,7 +2,18 @@
   "article": [],
   "blog": [],
   "brand": [],
-  "collection": [],
+  "collection": [
+    {
+      "key": "badge_title",
+      "namespace": "custom",
+      "name": "Titre badge",
+      "description": "Création d'un badge au nom personnalisé",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    }
+  ],
   "company": [],
   "company_location": [],
   "location": [],

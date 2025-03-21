@@ -28,4 +28,4 @@ shopify theme push
 
 ## Exercice 3 : Utilisation de Shopify CLI et gestion de version
 
-## Exercice 4 : réduction automatique de 10 % sur une collection
+## [Exercice 4](./doc/ex4-collection-automated-promotion.md) : réduction automatique de 10 % sur une collection
