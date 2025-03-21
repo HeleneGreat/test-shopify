@@ -1,0 +1,3 @@
+# Exercice 2 : Automatisation de la gestion de stocks via Shopify Flow
+
+[![⬉ Retour au README](https://img.shields.io/badge/⬉%20Retour-README-blue)](../README.md)  [![← Exercice précédent : Exercice 1](https://img.shields.io/badge/←%20Exercice%20précédent-Exercice%201-green)](./ex1-custom-cart-drawer.md)  [![Exercice suivant : Exercice 3 →](https://img.shields.io/badge/Exercice%20suivant%20→-Exercice%203-green)](./ex3-shopify-cli-versioning.md)

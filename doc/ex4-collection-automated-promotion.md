@@ -53,3 +53,6 @@ Avec l'utilisation des metafields, la promotion est bien appliquée dans le pani
 Fichiers modifiés :
 [price.liquid](../snippets/price.liquid)
 [card-product.liquid](../snippets/card-product.liquid)
+
+
+[![⬉ Retour au README](https://img.shields.io/badge/⬉%20Retour-README-blue)](../README.md)  [![← Exercice précédent : Exercice 3](https://img.shields.io/badge/←%20Exercice%20précédent-Exercice%203-green)](./ex3-shopify-cli-versioning.md)
