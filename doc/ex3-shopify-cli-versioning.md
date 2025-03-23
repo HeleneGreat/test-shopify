@@ -46,9 +46,8 @@ git -m "free gift bar snippet creation"
 git push
 # Sur GitHub, dans Pull requests, créer une PR avec les derniers commmits.
 # Normalement il est recommandé que la personne qui fait la PR ne soit pas celle qui la merge, mais là je travaille seule. 
-# Je supprime la branche qui a été mergée.
-
-
+# Je supprime en local la branche qui a été mergée.
+git branch -d ex3-shopify-cli-versioning
 ```
 
 ## Documentation et processus collaboratif

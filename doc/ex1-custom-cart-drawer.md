@@ -166,4 +166,4 @@ Réductions "Buy X get Y" dans le back office. Problème : il faudrait sélectio
 **Sources :** https://shopify.dev/docs/api/ajax/reference/cart
 
 
-[![⬉ Retour au README](https://img.shields.io/badge/⬉%20Retour-README-blue)](../README.md)  [![Exercice suivant : Exercice 2 →](https://img.shields.io/badge/Exercice%20suivant%20→-Exercice%202-green)](exercice2.md)
+[![⬉ Retour au README](https://img.shields.io/badge/⬉%20Retour-README-blue)](../README.md)  [![Exercice suivant : Exercice 2 →](https://img.shields.io/badge/Exercice%20suivant%20→-Exercice%202-green)](./ex2-stock-automatisation-flow.md)
