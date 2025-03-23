@@ -4,13 +4,13 @@
   Il est conçu pour être utilisé dans un thème Shopify, en particulier avec le thème Dawn.
 {% endcomment %}
 
-{% comment %} Récupération de la couleur de la barre de progression depuis les paramètres du thème {% endcomment %}
+{% # Récupération de la couleur de la barre de progression depuis les paramètres du thème %}
 {% assign progress_gift_bar_color = settings.gift_bar_color %}
-{% comment %} Inclusion du fichier CSS externe pour la barre de progression {% endcomment %}
+{% # Inclusion du fichier CSS externe pour la barre de progression %}
 {{ 'shipping-gift-bars.css' | asset_url | stylesheet_tag }}
-{% comment %} Si aucun produit n'est assigné par défaut,  {% endcomment %}
+{% # Si aucun produit n'est assigné par défaut,  %}
 {% comment %} {% assign gift_product_id = settings.gift_product | default: 54254704099654 %} {% endcomment %}
-
+{% assign gift_product_id = 54254704099654 %} {% #pour le moment ce n'est pas paramétrable car le snippet me renvoit le nom du produit, pas son ID %}
 
 <div class="upsell-container">
   {% # Définition des variables pour le calcul de la progression. Les montants sont multipliés par 100 car les prix sont stockés en centimes. %}
@@ -49,6 +49,7 @@
 </style>
 
 
+{% # Récupération des variables du snippet pour les injecter aux variables JS %}
 <script>
   window.freeGiftSettings = {
     giftProductId: {{ gift_product_id }},
@@ -56,5 +57,5 @@
   };
 </script>
 
-{% comment %} Inclusion du fichier JS externe pour l'ajout du produit offert dans le panier {% endcomment %}
+{% # Inclusion du fichier JS externe pour l'ajout du produit offert dans le panier %}
 <script src="{{ 'free-gift.js' | asset_url }}" defer="defer"></script>

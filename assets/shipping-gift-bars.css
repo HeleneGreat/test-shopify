@@ -16,7 +16,6 @@
     align-items: center;
 }
 
-/* C'est ici que sont récupérées les valeurs transmises par le snippet */
 .progress-bar-done{
     display: flex;
     text-align: center;
@@ -28,6 +27,7 @@
     max-width: 100%;
 }
 
+/* C'est ici que sont récupérées les valeurs transmises par le snippet */
 /* Barre de progression pour les frais de livraison gratuits */
 .progress-bar-done.shipping{
     background-color: var(--progress-shipping-bar-color);

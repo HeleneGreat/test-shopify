@@ -1,7 +1,7 @@
 # Exercice 2 : Automatisation de la gestion de stocks via Shopify Flow
-[1. Configuration du flux d'automatisation](##Configuration-du-flux-d'automatisation)
-[2. Gestion des erreurs et scénarios particuliers](#gestion-des-erreurs-et-scénarios-particuliers)
-[3. Documentation et démonstration technique](#documentation-et-démonstration-technique)
+- [1. Configuration du flux d'automatisation](##Configuration-du-flux-d'automatisation)
+- [2. Gestion des erreurs et scénarios particuliers](#gestion-des-erreurs-et-scénarios-particuliers)
+- [3. Documentation et démonstration technique](#documentation-et-démonstration-technique)
 
 ## Configuration du flux d'automatisation
 - *Déclencheur : le flux doit se déclencher lors de la création d'une commande.*
