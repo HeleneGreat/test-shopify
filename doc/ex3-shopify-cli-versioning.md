@@ -29,25 +29,34 @@ shopify theme push
 
 Création d'un [dépôt Github](https://github.com/HeleneGreat/test-shopify) pour le projet.
 Utilisation de différentes commandes git pour versionner le projet, tel que : 
-```git
+```bash
 # Création d'un dépôt sur GitHub puis récupération en local
 git init
 git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/HeleneGreat/test.git
 git push -u origin main
+
 # Création d'une branche pour l'exercice 3
 git branche ex3-shopify-cli-versioning
+
 # Envoi de la branche locale sur le dépôt distant
 git push --set-upstream origin ex3-shopify-cli-versioning
+
 # Exemple de commit
 git -m "free gift bar snippet creation"
+
 # Envoi des commits locaux sur le dépôt distant
 git push
+
 # Sur GitHub, dans Pull requests, créer une PR avec les derniers commmits.
 # Normalement il est recommandé que la personne qui fait la PR ne soit pas celle qui la merge, mais là je travaille seule. 
+
 # Je supprime en local la branche qui a été mergée.
 git branch -d ex3-shopify-cli-versioning
+
+# Récupérer en local les changements du dépôt distant
+git pull
 ```
 
 ## Documentation et processus collaboratif

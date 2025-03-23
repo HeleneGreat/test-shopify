@@ -133,12 +133,14 @@
         {%- endif -%}
       {%- endfor -%}
 
+      {% # Affichage du prix remisé %}
       {%- if product.compare_at_price > product.price -%}
         <span class="badge color-{{ settings.sale_badge_color_scheme }}">
           {{ 'products.product.on_sale' | t }}
         </span>
       {%- endif -%}
 
+      {% # Badge "sold out" si le produit n'est plus disponible %}
       {%- unless product.available -%}
         <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
           {{ 'products.product.sold_out' | t }}

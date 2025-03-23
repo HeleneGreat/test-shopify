@@ -52,7 +52,64 @@ Avec l'utilisation des metafields, la promotion est bien appliquée dans le pani
 
 Fichiers modifiés :
 [price.liquid](../snippets/price.liquid)
-[card-product.liquid](../snippets/card-product.liquid)
+```php
+ {%- if show_badges -%}
+  {% # On parcourt les collections associées au produit : si elles ont le metafield correspondant à nos promotions, on l'affiche %}
+      {%- for c in product.collections -%}
+        {%- if c.metafields.custom.badge_title != blank and c.metafields.custom.badge_title != '' -%}
+          <span class="badge color-{{ settings.sale_badge_color_scheme }}">
+            {{ c.metafields.custom.badge_title }}
+          </span>
+        {%- endif -%}
+      {%- endfor -%}
 
+      {% # Affichage du prix remisé %}
+      {%- if product.compare_at_price > product.price -%}
+        <span class="badge color-{{ settings.sale_badge_color_scheme }}">
+          {{ 'products.product.on_sale' | t }}
+        </span>
+      {%- endif -%}
+
+      {% # Badge "sold out" si le produit n'est plus disponible %}
+      {%- unless product.available -%}
+        <span class="badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}">
+          {{ 'products.product.sold_out' | t }}
+        </span>
+      {%- endunless -%}
+       {%- endif -%}
+```
+
+[card-product.liquid](../snippets/card-product.liquid)
+```php
+    <div class="card__badge {{ settings.badge_position }}">
+      {% # On parcourt les collections associées au produit : si elles ont le metafield correspondant à nos promotions, on l'affiche %}
+        {%- for c in card_product.collections -%}
+            {%- if c.metafields.custom.badge_title != blank and c.metafields.custom.badge_title != '' -%}
+            <span class="badge color-{{ settings.sale_badge_color_scheme }}">
+                {{ c.metafields.custom.badge_title }}
+            </span>
+            {%- endif -%}
+        {%- endfor -%}
+
+        {% # Si le produit est indisponible %}
+        {%- if card_product.available == false -%}
+            <span
+            id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+            class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
+            >
+            {{- 'products.product.sold_out' | t -}}
+            </span>
+
+        {% # Si le prix est réduit %}
+        {%- elsif card_product.compare_at_price > card_product.price -%}
+            <span
+            id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+            class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
+            >
+                {{ 'products.product.on_sale' | t }}
+            </span>
+        {%- endif -%}
+    </div>
+```
 
 [![⬉ Retour au README](https://img.shields.io/badge/⬉%20Retour-README-blue)](../README.md)  [![← Exercice précédent : Exercice 3](https://img.shields.io/badge/←%20Exercice%20précédent-Exercice%203-green)](./ex3-shopify-cli-versioning.md)
