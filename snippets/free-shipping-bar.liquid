@@ -4,9 +4,9 @@
   Il est conçu pour être utilisé dans un thème Shopify, en particulier avec le thème Dawn.
 {% endcomment %}
 
-{% comment %} Récupération de la couleur de la barre de progression depuis les paramètres du thème {% endcomment %}
+{% # Récupération de la couleur de la barre de progression depuis les paramètres du thème  %}
 {% assign progress_shipping_bar_color = settings.shipping_bar_color %}
-{% comment %} Inclusion du fichier CSS externe pour la barre de progression {% endcomment %}
+{% # Inclusion du fichier CSS externe pour la barre de progression %}
 {{ 'shipping-gift-bars.css' | asset_url | stylesheet_tag }}
 
 <div class="upsell-container">
