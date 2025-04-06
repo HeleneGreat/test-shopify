@@ -12,14 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(cart => {
           let cartTotal = cart.total_price; // Montant total du panier
-          let giftInCart = cart.items.some(item => item.id === giftProductId); // Vérifier si le cadeau est déjà dans le panier
+          let giftItem = cart.items.find(item => item.id === giftProductId); // Trouver l'article cadeau dans le panier
 
           // Si le montant du panier est supérieur ou égal au montant minimum et que le cadeau n'est pas dans le panier, on l'ajoute
-          if (cartTotal >= minimumCartValue && !giftInCart) {
+          if (cartTotal >= minimumCartValue && !giftItem && !giftAdded) {
             addGiftToCart();
           // Si le montant du panier est inférieur au montant minimum et que le cadeau est dans le panier, on le retire
-          } else if (cartTotal < minimumCartValue && giftInCart) {
-            removeGiftFromCart();
+          } else if (cartTotal < minimumCartValue && giftItem) {
+            removeGiftFromCart(giftItem.key);
           }
         });
     }
@@ -30,40 +30,45 @@ document.addEventListener("DOMContentLoaded", function () {
         method: "POST", // Utiliser la méthode POST pour ajouter un produit
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id: giftProductId, // ID du produit cadeau
-          quantity: 1 // Quantité du cadeau à ajouter
+          items: [{
+            id: giftProductId, // ID du produit cadeau
+            quantity: 1, // Quantité du cadeau à ajouter
+            properties: { is_gift: true } // Propriété personnalisée pour indiquer que c'est un cadeau
+          }]
         })
       })
         .then(response => response.json())
         .then(() => {
-          // console.log("Cadeau ajouté !");
+          giftAdded = true; // Met à jour l'état pour indiquer que le cadeau est ajouté
           updateCartUI(); // Mettre à jour l'interface utilisateur du panier
-        });
+        })
+        .catch(error => console.error("Erreur lors de l'ajout du cadeau :", error));
     }
 
     // Fonction pour retirer le cadeau du panier
-    function removeGiftFromCart() {
+    function removeGiftFromCart(itemKey) {
       fetch("/cart/change.js", {
-        method: "POST", // Utiliser la méthode POST pour changer la quantité d'un produit dans le panier
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id: giftProductId, // ID du produit cadeau
+          id: itemKey, // Utiliser la clé unique de l'article dans le panier
           quantity: 0 // Quantité du cadeau dans le panier (mettre à zéro)
         })
       })
         .then(response => response.json())
         .then(() => {
-          // console.log("Cadeau retiré !");
+          giftAdded = false; // Met à jour l'état pour indiquer que le cadeau est retiré
           updateCartUI(); // Mettre à jour l'interface utilisateur du panier
-        });
+        })
+        .catch(error => console.error("Erreur lors du retrait du cadeau :", error));
     }
 
-    // Fonction pour mettre à jour l'interface du panier
+    // Met à jour l'interface du panier
     function updateCartUI() {
-          document.dispatchEvent(new Event('cart:updated'));
+      document.dispatchEvent(new Event('cart:updated'));
     }
 
-    // Ecouteur d'événement qui vérifie l'état du panier chaque fois qu'il est mis à jour
+    // Écoute les mises à jour du panier
     document.addEventListener("cart:updated", checkCartForGift);
 
     // Effectuer la première vérification du panier au chargement de la page
