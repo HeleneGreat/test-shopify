@@ -10,21 +10,22 @@
 {% # Inclusion du fichier CSS externe pour la barre de progression %}
 {{ 'shipping-gift-bars.css' | asset_url | stylesheet_tag }}
 {% # Si aucun produit n'est assigné par défaut, %}
+{% assign gift_product_id = settings.gift_product.variants.first.id | default: 54254704099654 %}
 {% comment %} {% assign gift_product_id = settings.gift_product | default: 54254704099654 %} {% endcomment %}
-{% assign gift_product_id = 54254704099654 %}
+{% comment %} {% assign gift_product_id = 54254704099654 %} {% endcomment %}
 {% # VARIANT du cadeau %}
 {% # pour le moment ce n'est pas paramétrable car le snippet me renvoit le nom du produit, pas son ID %}
 
 <div class="upsell-container">
   {% # Définition des variables pour le calcul de la progression. Les montants sont multipliés par 100 car les prix sont stockés en centimes. %}
+  {% # Montant minimum pour le cadeau offert %}
   {% assign gift_value = settings.minimum_free_gift | times: 100 %}
-  {% # Montant minimum pour la livraison gratuite %}
-  {% assign cart_total = cart.total_price %}
   {% # Total actuel du panier %}
-  {% assign gift_value_left = gift_value | minus: cart_total %}
-  {% # Montant restant avant d'obtenir la livraison gratuite %}
-  {% assign gift_percentage_fraction = cart_total | times: 100 | divided_by: gift_value %}
+  {% assign cart_total = cart.total_price %}
+  {% # Montant restant avant d'obtenir le cadeau offert : on soustrait le montant du cadeau au cas où il est > 0€ %}
+  {% assign gift_value_left = gift_value | minus: cart_total | minus: gift_product.price %}
   {% # Pourcentage de progression %}
+  {% assign gift_percentage_fraction = cart_total | times: 100 | divided_by: gift_value %}
 
   <p class="gift-message">
     {% if gift_value_left > 0 %}
