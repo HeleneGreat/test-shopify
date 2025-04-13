@@ -9,12 +9,8 @@
 {% assign progress_gift_bar_color = settings.gift_bar_color %}
 {% # Inclusion du fichier CSS externe pour la barre de progression %}
 {{ 'shipping-gift-bars.css' | asset_url | stylesheet_tag }}
-{% # Si aucun produit n'est assigné par défaut, %}
-{% assign gift_product_id = settings.gift_product.variants.first.id | default: 54254704099654 %}
-{% comment %} {% assign gift_product_id = settings.gift_product | default: 54254704099654 %} {% endcomment %}
-{% comment %} {% assign gift_product_id = 54254704099654 %} {% endcomment %}
-{% # VARIANT du cadeau %}
-{% # pour le moment ce n'est pas paramétrable car le snippet me renvoit le nom du produit, pas son ID %}
+{% # Récupération de l'ID du produit offert %}
+{% assign gift_product_id = settings.gift_product.variants.first.id %}
 
 <div class="upsell-container">
   {% # Définition des variables pour le calcul de la progression. Les montants sont multipliés par 100 car les prix sont stockés en centimes. %}

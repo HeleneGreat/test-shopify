@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const minimumCartValue = settings.minimumCartValue; // Montant minimum du panier pour ajouter un cadeau
       let giftAdded = false; // Savoir si le cadeau est déjà ajouté
       let isUpdatingCart = false; // Empêche les requêtes multiples simultanées
-console.log("Gift product ID:", giftProductId); // Debugging
 
       // Vérifier l'état du panier
       function checkCartForGift() {

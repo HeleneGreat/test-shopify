@@ -152,8 +152,8 @@ Cliquer sur l'icône des paramètres :
 {% assign progress_gift_bar_color = settings.gift_bar_color %}
 {% # Inclusion du fichier CSS externe pour la barre de progression %}
 {{ 'shipping-gift-bars.css' | asset_url | stylesheet_tag }}
-{% # Si aucun produit n'est assigné par défaut,  %}
-{% assign gift_product_id = settings.gift_product | default: 54254704099654 %}
+{% # Récupération de l'ID du produit offert %}
+{% assign gift_product_id = settings.gift_product.variants.first.id %}
 
 <div class="upsell-container">
   {% # Définition des variables pour le calcul de la progression. Les montants sont multipliés par 100 car les prix sont stockés en centimes. %}
@@ -368,15 +368,17 @@ document.addEventListener("DOMContentLoaded", function () {
       initializeCartEvents();
   });
 ```
-J'en ai aussi profité pour ajouter une sécurité dans le template du produit offert si le montant du cadeau est > 0€ :
+J'en ai aussi profité pour ajouter une sécurité dans le template du produit offert si le montant du cadeau est > 0€, et réparer l'ID du produit offert, qui est récupéré selon le paramétrage de la boutique :
 ```php
+{% # Récupération de l'ID du produit offert %}
+{% assign gift_product_id = settings.gift_product.variants.first.id %}
+
 {% # Montant restant avant d'obtenir le cadeau offert : on soustrait le montant du cadeau au cas où il est > 0€ %}
 {% assign gift_value_left = gift_value | minus: cart_total | minus: gift_product.price %}
 ```
 
-Il me reste deux points à améliorer :
-- Déréférencer le cadeau de la boutique tout en le gardant accessible via l'API des produits,
-- Récupérer l'ID du cadeau via le snippet personnalisable : pour le moment ce n'est pas fait car le snippet me renvoit le nom du produit, pas son ID
+Il me reste qu'un point à améliorer : déréférencer le cadeau de la boutique tout en le gardant accessible via l'API des produits.
+
 
 ## Performance et maintenabilité
 - *Optimiser le code JavaScript pour garantir une mise à jour fluide et réactive du cart drawer.*
