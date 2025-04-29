@@ -377,7 +377,87 @@ J'en ai aussi profité pour ajouter une sécurité dans le template du produit o
 {% assign gift_value_left = gift_value | minus: cart_total | minus: gift_product.price %}
 ```
 
-Il me reste qu'un point à améliorer : déréférencer le cadeau de la boutique tout en le gardant accessible via l'API des produits.
+
+Pour terminé, j'ai déréférencé le cadeau, pour qu'il ne soit pas accessible aux clients. Il n'est pas possible de l'enlever de la boutique sur l'administration du produit, sinon il ne serait plus disponible pour l'API et le script d'ajout au panier. 
+J'ai donc ajouté une balise "hidden" dans l'interface admin, puis j'ai modifié les templates où il serait succeptible d'être appelé : 
+
+- [sections/main-product.liquid](../sections/main-product.liquid) : ligne 1
+```php
+{% if product.tags contains 'hidden' %}
+  <script>
+    window.location.href = '/404';
+  </script>
+  {% comment %} Produit masqué via balise hidden {% endcomment %}
+{% endif %}
+```
+
+- [snippets/card-product.liquid](../snippets/card-product.liquid) : ligne 31
+```php
+{% unless card_product.tags contains 'hidden' %}
+  {%- if card_product and card_product != empty -%}
+  ...
+{% endunless %}
+```
+
+- [sections/predictive-search.liquid](../sections/predictive-search.liquid) : ligne 126 && 255
+```php
+{% # Comptage des résultats pour qu'ils contiennent des produits visibles %}
+{%- assign visible_product_count = 0 -%}
+{%- for visible_product in predictive_search.resources.products -%}
+  {%- unless visible_product.tags contains 'hidden' -%}
+    {%- assign visible_product_count = visible_product_count | plus: 1 -%}
+    {% break %}
+  {%- endunless -%}
+{%- endfor -%}
+{% # S'il y a au moins 1 produit non caché, on affiche la liste de résultats %}
+{% if visible_product_count > 0 %}
+  <ul
+    id="predictive-search-results-products-list"
+    class="predictive-search__results-list list-unstyled"
+    role="group"
+    aria-labelledby="predictive-search-products"
+  >
+    {% for product in predictive_search.resources.products %}
+      {%- unless product.tags contains 'hidden' -%}
+        <li>
+        ...
+        </li>
+      {%- endunless -%}
+    {%- endfor -%}
+  </ul>
+{% endif %}
+```
+
+```php
+<span class="hidden" data-predictive-search-live-region-count-value>
+  {% # Remplacement du nombre de produits trouvés par celui des produits non cachés %}
+  {% assign visible_product_count = 0 %}
+  {% for product in predictive_search.resources.products %}
+    {% unless product.tags contains 'hidden' %}
+      {% assign visible_product_count = visible_product_count | plus: 1 %}
+    {% endunless %}
+  {% endfor %}
+  {% liquid
+    assign total_results = predictive_search.resources.visible_product_count | plus: first_column_results_size
+    if total_results == 0
+      echo 'templates.search.no_results' | t: terms: predictive_search.terms
+    else
+      echo 'templates.search.results_with_count' | t: count: total_results | append: ': '
+      if predictive_search.resources.queries.size > 0
+        assign count = predictive_search.resources.queries.size | plus: predictive_search.resources.collections.size
+        echo 'templates.search.results_suggestions_with_count' | t: count: count | append: ', '
+      endif
+      if predictive_search.resources.pages.size > 0
+        assign count = predictive_search.resources.pages.size | plus: predictive_search.resources.articles.size
+        echo 'templates.search.results_pages_with_count' | t: count: count | append: ', '
+      endif
+      if predictive_search.resources.visible_product_count > 0
+        echo 'templates.search.results_products_with_count' | t: count: predictive_search.resources.visible_product_count
+      endif
+    endif
+  %}
+</span>
+```
 
 
 ## Performance et maintenabilité
